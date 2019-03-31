@@ -283,7 +283,19 @@ div#response.display-block {
       </div>
 
       <div class="topnav">
-  <a class="active" href="#logout">logout</a></div>
+    <a href="#">Report</a>
+          
+  <?php
+      session_start();
+      if(isset($_SESSION['Username'])) {
+        echo 'Welcome '.$_SESSION['Username'];
+        echo '<a  href="logout.php">Logout</a>';
+      } else {
+        echo '<a  href="home.php">Login</a>';
+      }
+      ?>
+        
+      </div>
   
 
 

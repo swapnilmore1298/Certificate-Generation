@@ -22,7 +22,7 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     session_start();
-	$_SESSION['username'] = mysqli_fetch_assoc($result)['username'];
+	$_SESSION['Username'] = mysqli_fetch_assoc($result)['Username'];
 	header('Location: index.php');
     }
 else {

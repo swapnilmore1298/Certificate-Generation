@@ -8,8 +8,11 @@ $phpWord = new \PhpOffice\PhpWord\PhpWord();
 
 if (isset($_POST["import"]))
 {
-    echo($_POST["event"]);
+    // echo($_POST["event"]);
     $event = $_POST["event"];
+    $conduct = $_POST["conduct"];
+    $date = $_POST["trip-start"];  
+    echo $date;
     
  $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
   echo($_FILES["file"]["type"]);
@@ -37,10 +40,10 @@ if($pathinfo['extension'] == 'xlsx' || $pathinfo['extension'] == 'xls' )
                     $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('resources/Certi1-organizers.docx'); 
                     
                     // $templateProcessor->setValue('conduct', 'Co-ordinator');
-                    echo('ORGANIZER');
+                    // echo('ORGANIZER');
                 }else{
                     $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('resources/Certi2- participants.docx');
-                    echo('participants');
+                    // echo('participants');
                     // $templateProcessor->setValue('conduct', '');
                     
                 }  
@@ -52,7 +55,7 @@ if($pathinfo['extension'] == 'xlsx' || $pathinfo['extension'] == 'xls' )
                     # code...
                     $name = $Row[0];  
                     $templateProcessor->setValue('name', $name);
-                    echo($name);
+                    // echo($name);
                     
                 }
 
@@ -66,7 +69,7 @@ if($pathinfo['extension'] == 'xlsx' || $pathinfo['extension'] == 'xls' )
                 }
 
                 $templateProcessor->setValue('event', $event);
-                
+                $templateProcessor->setValue('conduct',$conduct);
 
 
                 $templateProcessor->saveAs('results/'.$Row[0].'.docx');
@@ -263,7 +266,19 @@ div#response.display-block {
     bottom:0;
     width: 102%;
 }
+label {
+    display: block;
+    font: 1rem 'Fira Sans', sans-serif;
+}
 
+input,
+label {
+    margin: .4rem 0;
+}
+
+.note {
+    font-size: .8em;
+}
 
 
     </style>
@@ -318,13 +333,18 @@ div#response.display-block {
                 <button type="submit" id="submit" name="import"
                     class="btn-submit">Import</button><br><br>
                     <p>Select type of Certi :</p>
-                    <select name="Type">
+                    <select name="conduct">
                       <option value="" selected disabled hidden>Choose</option>
                      <option value="organiser">Organiser</option>
                          <option value="participants">Participants</option>
   
                         </select>   <br><br><br>
                 Event: <input type = "text" name = "event" value = "">
+                <label for="start">Start date:</label>
+
+<input type="date" id="start" name="trip-start"
+       min="2018-01-01" max="2032-12-31">
+
                 <button type="submit"  name="download"
                     >Download</button>
             </div>
@@ -338,7 +358,7 @@ div#response.display-block {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
   <div class="footer">
-  <p>© Copyrights MRS Pvt. Ltd | Rights Reserved | Email us @ abc@yahoo.com </p>
+ 
 </div>
 
 

@@ -41,3 +41,12 @@ $file = uniqid().'.pdf';
 //$pdf->Output('I', $file);
 $pdf->Output('output/'.$file, 'I');
 ?>
+<?php
+      session_start();
+      if(isset($_SESSION['Username'])) {
+        echo 'Welcome '.$_SESSION['Username'];
+        echo '<a  href="logout.php">Logout</a>';
+      } else {
+        echo '<a  href="home.php">Login</a>';
+      }
+      ?>
